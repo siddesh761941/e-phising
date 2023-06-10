@@ -16,12 +16,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(deserializeUser);
 
-app.use(
-  cors({
-    credentials: true,
-    origin: ["https://e-phsing.firebaseapp.com/", "https://e-phsing.web.app/"]
-  })
-);
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: ["https://e-phsing.firebaseapp.com/", "https://e-phsing.web.app/"]
+//   })
+// );
+
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 const mongoConnection = async () => {
   const db = await fetchRetry(5, mongoUtil.connectToDB);

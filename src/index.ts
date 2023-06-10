@@ -19,7 +19,7 @@ app.use(deserializeUser);
 app.use(
   cors({
     credentials: true,
-    origin: ["https://e-phsing.web.app/"]
+    origin: ["https://e-phsing.firebaseapp.com/", "https://e-phsing.web.app/"]
   })
 );
 

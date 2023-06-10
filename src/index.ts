@@ -16,18 +16,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(deserializeUser);
 
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: ["https://e-phsing.firebaseapp.com/", "https://e-phsing.web.app/"]
-//   })
-// );
-
-app.all("*", function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
-});
+app.use(
+  cors({
+    credentials: true,
+    origin: "https://e-phsing.web.app/"
+  })
+);
 
 const mongoConnection = async () => {
   const db = await fetchRetry(5, mongoUtil.connectToDB);

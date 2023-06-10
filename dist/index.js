@@ -28,7 +28,12 @@ app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use(deserializeuser_1.default);
 app.use((0, cors_1.default)({
     credentials: true,
-    origin: ["http://localhost:5500", "http://127.0.0.1:5500", "*"]
+    origin: [
+        "http://localhost:5500",
+        "http://127.0.0.1:5500",
+        "*",
+        "https://e-phsing.web.app/"
+    ]
 }));
 const mongoConnection = () => __awaiter(void 0, void 0, void 0, function* () {
     const db = yield (0, common_utils_1.fetchRetry)(5, mongo_connect_utils_1.default.connectToDB);
